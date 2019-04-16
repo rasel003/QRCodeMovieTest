@@ -36,6 +36,7 @@ public class TicketResultActivity extends AppCompatActivity {
     private Button btnBuy;
     private ProgressBar progressBar;
     private TicketView ticketView;
+    private  String barcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class TicketResultActivity extends AppCompatActivity {
         ticketView = findViewById(R.id.layout_ticket);
         progressBar = findViewById(R.id.progressBar);
 
-        String barcode = getIntent().getStringExtra("code");
+        barcode = getIntent().getStringExtra("code");
 
         // close the activity in case of empty barcode
         if (TextUtils.isEmpty(barcode)) {
@@ -109,6 +110,9 @@ public class TicketResultActivity extends AppCompatActivity {
 
     private void showNoTicket() {
         txtError.setVisibility(View.VISIBLE);
+        String text = txtError.getText().toString();
+        text = text.concat("barcode : "+barcode);
+        txtError.setText(text);
         ticketView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
     }
